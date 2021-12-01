@@ -48,7 +48,7 @@ def print(students)
   i, number = 0, 1
   while i < students.count do
     if students[i][:name].chr == letter and students[i][:name].length < 12
-      puts "#{number}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+      puts "#{number}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
       number += 1
     end
   i += 1

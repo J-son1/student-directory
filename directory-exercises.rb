@@ -28,7 +28,7 @@ def print(students)
 
   i = 1
   students.map do |student|
-    if student[:name].chr == letter
+    if student[:name].chr == letter and student[:name].length < 12
       puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
       i += 1
     end

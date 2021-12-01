@@ -23,8 +23,15 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, i|
-    puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  puts "Please enter the first letter of the names you'd like printed."
+  letter = gets.chomp.upcase
+
+  i = 1
+  students.map do |student|
+    if student[:name].chr == letter
+      puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
+      i += 1
+    end
   end
 end
 

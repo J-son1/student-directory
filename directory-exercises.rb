@@ -26,12 +26,13 @@ def print(students)
   puts "Please enter the first letter of the names you'd like printed."
   letter = gets.chomp.upcase
 
-  i = 1
-  students.map do |student|
-    if student[:name].chr == letter and student[:name].length < 12
-      puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
-      i += 1
+  i, number = 0, 1
+  while i < students.length do
+    if students[i][:name].chr == letter and students[i][:name].length < 12
+      puts "#{number}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+      number += 1
     end
+  i += 1
   end
 end
 

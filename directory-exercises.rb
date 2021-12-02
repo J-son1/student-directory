@@ -65,6 +65,7 @@ end
 def print(students)
   # print students grouped by cohort.
   cohorts = students.map { |student| student[:cohort] }.uniq
+
   cohorts.each do |cohort|
     students.each do |student|
       puts "#{student[:name]} (#{student[:cohort]} cohort)" if student[:cohort] == cohort
@@ -78,6 +79,9 @@ def print_footer(names)
 end
 
 students = input_students
-print_header
-print(students)
-print_footer(students)
+# only print list if there is at least one student.
+if !students.empty?
+  print_header
+  print(students)
+  print_footer(students)
+end

@@ -7,6 +7,25 @@ def input_students
   name = gets.chomp
   # while the name is not empty, repeat this code.
   while !name.empty? do
+    puts "Enter #{name}'s cohort"
+    # cohort hash.
+    months = [
+      :january, :february, :march, :april, :may, :june, :july,
+      :august, :september, :october, :november, :december
+    ]
+    # get cohort from user.
+    cohort = gets.chomp.downcase.to_sym
+    # check cohort name is valid.
+    if cohort.empty?
+      # assign a default cohort.
+      cohort = :november
+    else
+      while !months.include?(cohort)
+        puts "Please enter a valid cohort"
+        cohort = gets.chomp.downcase.to_sym
+      end
+    end
+
     # add student hobbies.
     puts "Enter #{name}'s hobbies"
     puts "To finish, just hit return twice"
@@ -25,7 +44,7 @@ def input_students
     country_of_birth = gets.chomp.capitalize
 
     # add the student hash to the array.
-    students << {name: name, cohort: :november, hobbies: hobbies, country_of_birth: country_of_birth, height: nil}
+    students << {name: name, cohort: cohort, hobbies: hobbies, country_of_birth: country_of_birth, height: nil}
     puts "Now we have #{students.count} students"
     # get another name from the user
     puts "Please enter the name of the next student"

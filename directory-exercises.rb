@@ -61,16 +61,12 @@ def print_header
 end
 
 def print(students)
-  puts "Please enter the first letter of the names you'd like printed."
-  letter = gets.chomp.upcase
-
-  i, number = 0, 1
-  while i < students.count do
-    if students[i][:name].chr == letter and students[i][:name].length < 12
-      puts "#{number}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
-      number += 1
+  # print students grouped by cohort.
+  cohorts = students.map { |student| student[:cohort] }.uniq
+  cohorts.each do |cohort|
+    students.each do |student|
+      puts "#{student[:name]} (#{student[:cohort]} cohort)" if student[:cohort] == cohort
     end
-  i += 1
   end
 end
 

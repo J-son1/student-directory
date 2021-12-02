@@ -45,7 +45,9 @@ def input_students
 
     # add the student hash to the array.
     students << {name: name, cohort: cohort, hobbies: hobbies, country_of_birth: country_of_birth, height: nil}
-    puts "Now we have #{students.count} students"
+    
+    students.count == 1 ? plurality = "student" : plurality = "students"
+    puts "Now we have #{students.count} #{plurality}"
     # get another name from the user
     puts "Please enter the name of the next student"
     puts "Or, hit return to finish"
@@ -71,7 +73,8 @@ def print(students)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  names.count == 1 ? plurality = "student" : plurality = "students"
+  puts "Overall, we have #{names.count} great #{plurality}"
 end
 
 students = input_students

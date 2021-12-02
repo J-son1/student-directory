@@ -11,7 +11,7 @@ def input_students
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
     # get another name from the user
-    name = get.chomp
+    name = gets.chomp
   end
   # return the array of students
   students
@@ -19,7 +19,7 @@ end
 
 def print_header
   puts "The students of my cohort at Makers Academy"
-  puts `-------------`
+  puts "-------------"
 end
 
 def print(students)
@@ -33,7 +33,7 @@ def print_footer(names)
 end
 
 
-students = input-students
+students = input_students
 print_header
-print{students}
-print_footer[students]
+print(students)
+print_footer(students)

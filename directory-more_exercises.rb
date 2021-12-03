@@ -5,7 +5,7 @@ def print_menu
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
   puts "4. Load the list from students.csv"
-  puts "9. Exit" # 9 because we'll be adding more items
+  puts "5. Exit"
 end
 
 def interactive_menu
@@ -16,23 +16,17 @@ def interactive_menu
 end
 
 def process(selection)
-  case selection
-    when "1"
-      input_students
-    when "2"
-      show_students
-    when "3"
-      save_students
-    when "4"
-      load_students
-    when "9"
-      exit
-    else
-      puts "I don't know what you meant, try again"
+  case selection  # inline case statement for readability
+  when "1" then input_students
+  when "2" then show_students
+  when "3" then save_students
+  when "4" then load_students
+  when "5" then exit
+  else puts "I don't know what you meant, try again"
   end
 end
 
-def add_student(name, cohort) 
+def add_student_to_list(name, cohort) # _to_list added to method name for clarity
   @students << {name: name, cohort: cohort.to_sym}
 end
 
@@ -44,7 +38,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    add_student(name, "november")
+    add_student_to_list(name, "november")
     puts "Now we have #{@students.count} students"
     # get another name from the user
     name = STDIN.gets.chomp
@@ -88,7 +82,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    add_student(name, cohort)
+    add_student_to_list(name, cohort)
   end
   file.close
 end

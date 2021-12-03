@@ -16,6 +16,7 @@ def interactive_menu
 end
 
 def process(selection)
+  puts "You chose option #{selection}"
   case selection  # inline case statement for readability
   when "1" then input_students
   when "2" then show_students
@@ -76,6 +77,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "Saved #{@students.count} to #{filename}" # add feedback message
 end
 
 def load_students(filename = "students.csv")
@@ -85,6 +87,7 @@ def load_students(filename = "students.csv")
     add_student_to_list(name, cohort)
   end
   file.close
+  puts "Loaded #{@students.count} from #{filename}"
 end
 
 def try_load_students
@@ -98,7 +101,6 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
   end
-  puts "Loaded #{@students.count} from #{filename}"
 end
 
 try_load_students

@@ -1,10 +1,11 @@
 @students = [] # an empty array accessible to all methods
+@default_filename = "students.csv"
 
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list"
+  puts "4. Load a list"
   puts "5. Exit"
 end
 
@@ -17,18 +18,21 @@ end
 
 def process(selection)
   puts "You chose option #{selection}"
-  case selection  # inline case statement for readability
-  when "1" then input_students
-  when "2" then show_students
-  when "3" then save_students
-  when "4" then load_students
-  when "5" then exit
-  else puts "I don't know what you meant, try again"
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "3"
+    save_students
+  when "4"
+    filename = get_filename
+    load_students(filename)
+  when "5"
+    exit
+  else 
+    puts "I don't know what you meant, try again"
   end
-end
-
-def add_student_to_list(name, cohort) # _to_list added to method name for clarity
-  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def input_students
@@ -44,6 +48,10 @@ def input_students
     # get another name from the user
     name = STDIN.gets.chomp
   end
+end
+
+def add_student_to_list(name, cohort) # _to_list added to method name for clarity
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def show_students
@@ -68,8 +76,9 @@ def print_footer
 end
 
 def save_students
+  filename = get_filename # get filename from user
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -80,7 +89,7 @@ def save_students
   puts "Saved #{@students.count} to #{filename}" # add feedback message
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename = @default_filename)
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
@@ -88,6 +97,12 @@ def load_students(filename = "students.csv")
   end
   file.close
   puts "Loaded #{@students.count} from #{filename}"
+end
+
+def get_filename
+  puts "Please enter a filename"
+  filename = STDIN.gets.chomp
+  filename.empty? ? filename = @default_filename : filename
 end
 
 def try_load_students
